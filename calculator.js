@@ -16,7 +16,7 @@ function divide(a,b) {
         return "Cannot divide by zero!"
     }
     else 
-        quotient = (a/b).toFixed(2);
+        quotient = (a/b).toFixed(6);
         return +quotient;
 }
 
@@ -35,4 +35,4 @@ function operate(operator, num1, num2) {
     }
 }
 
-console.log(operate(`/`, 1, 2));
+console.log(operate(`/`, 8, 3));
