@@ -107,3 +107,43 @@ button:hover {
 button:active {
     opacity: .7;
 }
+
+footer {
+    min-height: 4vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    margin-top: auto;
+    width: 100%;
+    color: black;
+    flex-direction: row;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    padding: 10px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+footer a {
+    text-decoration: none;
+    color: black;
+    padding-right: 5px;
+}
+footer p {
+  padding-right: 5px;
+}
+
+footer a:hover {
+    text-decoration: underline;
+    color: black;
+    padding-right: 5px;
+}
+
+img {
+    width: 50px;
+}
+
+img:hover {
+    opacity: .5;
+}
