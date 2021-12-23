@@ -1,3 +1,7 @@
+const buttons = document.querySelectorAll('button');
+buttons.forEach(button => { button.addEventListener('click', operatorChoice) });
+
+
 function add(a,b) {
     return a+b;
 }
@@ -13,7 +17,7 @@ function multiply(a,b) {
 function divide(a,b) {
     let quotient;
     if (b === 0) {
-        return "Cannot divide by zero!"
+        return "ERR"
     }
     else 
         quotient = (a/b).toFixed(6);
@@ -35,4 +39,16 @@ function operate(operator, num1, num2) {
     }
 }
 
-console.log(operate(`/`, 8, 3));
+function operatorChoice(e) {
+    const opReturn = e.target.textContent;
+    if (isNaN(opReturn)) {
+        console.log(opReturn);
+    }
+    else {
+        console.log(+opReturn);
+    }
+}
+
+
+
+console.log(operate(`-`, 8, 3));
