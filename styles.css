@@ -38,8 +38,7 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding-bottom: px;
-    
+    padding-bottom: 0px;
 }
 
 .calc-row {
