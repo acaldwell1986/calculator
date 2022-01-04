@@ -40,7 +40,7 @@ function operate(operator, num1, num2) {
 }
 
 function operatorChoice(e) {
-    const opReturn = e.target.textContent;
+    const opReturn = e.target.innerHTML;
     if (isNaN(opReturn)) {
         console.log(opReturn);
     }
