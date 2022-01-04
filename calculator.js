@@ -125,7 +125,7 @@ function operate(operator, num1, num2) {
         case `/`:
             return divide(num1,num2)
         default:
-            return `Something went wrong.`
+            return `OPERR`
     }
 }
 
