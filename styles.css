@@ -108,11 +108,12 @@ button:active {
 }
 
 footer {
-    min-height: 4vh;
+    font-size: 1em;
+    
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: white;
+   
     margin-top: auto;
     width: 100%;
     color: black;
@@ -120,7 +121,7 @@ footer {
     position: fixed;
     left: 0;
     bottom: 0;
-    padding: 10px;
+    padding: 5px;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
@@ -140,9 +141,31 @@ footer a:hover {
 }
 
 img {
-    width: 50px;
+    width: 35px;
 }
 
 img:hover {
     opacity: .5;
+}
+
+.custom-shape-divider-bottom {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+    transform: rotate(180deg);
+}
+
+.custom-shape-divider-bottom svg {
+    position: relative;
+    display: block;
+    width: calc(240% + 1.6px);
+    height: 100px;
+    transform: rotateY(180deg);
+}
+
+.custom-shape-divider-bottom .shape-fill {
+    fill: #FFFFFF;
 }
