@@ -8,43 +8,62 @@ let operatorChosen = false;
 let num1;
 let num2;
 let result;
+let nextResult; //not affected by reset
 let numString1 = '';
 let numString2 = '';
 
+function reset() {
+    operator = '';
+    operatorChosen = false;
+    num1 = undefined;
+    num2 = undefined;
+    result = undefined;
+    calcDisplay.innerHTML = '|';
+    numString1 = '';
+    numString2 = '';
+}
 
 function operatorChoice(e) {
     const opReturn = e.target.innerHTML;
     
-    //case1
-    if (opReturn === '=' && operatorChosen === true) {
-        console.log('here1' + operate(operator, +numString1, +numString2))
+    //case1 - person selects first num, chooses operator, selects second num, hits equals
+    if (opReturn === '=' && operatorChosen === true && (num1 !== undefined && num2 !== undefined)) {
+        console.log('here1 ' + operate(operator, +numString1, +numString2))
         result = operate(operator, +numString1, +numString2);
-        calcDisplay.innerHTML = result;
+        let temp = result;
+        reset();
+        calcDisplay.innerHTML = temp;
+        nextResult = temp;
     }
 
-    //case2
-    else if (operatorChosen === true && result === undefined && num2 !== undefined) {
-        console.log('here2' + operate(operator, +numString1, +numString2))
+    //case2 first and second num chosen, result not calculated yet
+    else if (operatorChosen === true && result === undefined && num2 !== undefined && nextResult === undefined) {
+        console.log('here2 ' + operate(operator, +numString1, +numString2))
         result = operate(operator, +numString1, +numString2);
-        calcDisplay.innerHTML = result;
+        let temp = result;
+        reset();
+        calcDisplay.innerHTML = temp;
+        nextResult = temp;
     }
 
-    //case3
+    //case3 - result is not undefined so the cycle must be repeatable
+    else if (nextResult !== undefined) {
+        console.log('here3 ')
+
+    }
+
+    //case3 - result has been calculated, num1 and num2 must be reset to continue calculations to be used in conjunction with result
     // else if (operatorChosen === true && result === undefined && num2 !== undefined) {
     //     console.log('here3' + operate(operator, +numString1, +numString2))
     //     result = operate(operator, +numString1, +numString2);
     //     calcDisplay.innerHTML = result;
     // }
 
-    //case-end
+    //case-end-catchall
     else if (isNaN(opReturn) && opReturn !== '=') {
-        //need to do some work on resetting things to keep the loop going and saving the value before reset
-        if (operatorChosen === true) {
-            operator = e.target.innerHTML;
-            operatorChosen = false;
-       }
 
-       else if (operatorChosen !== true) {
+        //need to do some work on resetting things to keep the loop going and saving the value before reset
+     if (operatorChosen !== true) {
         operator = e.target.innerHTML;
         operatorChosen = true;
        }
@@ -97,7 +116,7 @@ function operatorChoice(e) {
         //nothing happens if more than 9 digits are added to second value
         else if (numString2 >= 10) {
             //nothing happens
-            console.log('numstring22')
+            console.log('numstring2')
             console.log(num1)
             console.log(num2)
             console.log(numString1)
@@ -111,16 +130,7 @@ function operatorChoice(e) {
     }
 }
 
-function reset() {
-    operator = '';
-    operatorChosen = false;
-    num1 = undefined;
-    num2 = undefined;
-    result = undefined;
-    calcDisplay.innerHTML = '|';
-    numString1 = '';
-    numString2 = '';
-}
+
 
 function add(a,b) {
     return a+b;
