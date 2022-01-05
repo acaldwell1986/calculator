@@ -50,6 +50,7 @@ function operatorChoice(e) {
         //nothing happens if more than 9 digits are added to first value
         else if (numString1.length >= 10 && operatorChosen === false) {
             //nothing happens
+            console.log('what1')
         }
         //first digit added to second value
         else if ((typeof num1 !== 'undefined') && (typeof num2 === 'undefined')) {
@@ -69,6 +70,11 @@ function operatorChoice(e) {
 
         else if (numString2 >= 10) {
             //nothing happens
+            console.log('what2')
+            console.log(num1)
+            console.log(num2)
+            console.log(numString1)
+            console.log(numString2)
         }
 
         //handles all other cases
