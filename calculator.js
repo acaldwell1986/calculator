@@ -67,7 +67,7 @@ function operatorChoice(e) {
             calcDisplay.innerHTML = numString2;
         }
         
-
+        //nothing happens if more than 9 digits are added to second value
         else if (numString2 >= 10) {
             //nothing happens
             console.log('what2')
