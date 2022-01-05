@@ -38,11 +38,12 @@ function clear() {
 function operatorChoice(e) {
     const opReturn = e.target.innerHTML;
 
+    //resets calculator if C is clicked
     if (e.target.innerHTML === 'C') {
         reset();
     }
     
-    //case1 - person selects first num, chooses operator, selects second num, hits equals
+    //case1 - handles person selects first num, chooses operator, selects second num, hits equals
     else if (opReturn === '=' && operatorChosen === true && (num1 !== undefined && num2 !== undefined)) {
         console.log('here1 ' + operate(operator, +numString1, +numString2))
         result = operate(operator, +numString1, +numString2);
@@ -52,7 +53,7 @@ function operatorChoice(e) {
         nextResult = temp;
     }
 
-    //case2 first and second num chosen, result not calculated yet
+    //case2 - handles first and second num chosen, result not calculated yet
     else if (operatorChosen === true && result === undefined && num2 !== undefined && nextResult === undefined) {
         console.log('here2 ' + operate(operator, +numString1, +numString2))
         result = operate(operator, +numString1, +numString2);
@@ -62,7 +63,7 @@ function operatorChoice(e) {
         nextResult = temp;
     }
 
-    //case3 - nextresult is not undefined so the cycle must be repeatable
+    //case3 - TODO: needs to restart the varibles or something
     else if (nextResult !== undefined && e.target.innerHTML !== 'C') {
         console.log('here3 ')
         console.log(e.target.innerHTML)
