@@ -7,7 +7,7 @@ let operator = '';
 let operatorChosen = false;
 let num1;
 let num2;
-let num3;
+let result;
 let numString1 = '';
 let numString2 = '';
 
@@ -15,21 +15,47 @@ let numString2 = '';
 function operatorChoice(e) {
     const opReturn = e.target.innerHTML;
     
+    //case1
     if (opReturn === '=' && operatorChosen === true) {
-        console.log(operate(operator, +numString1, +numString2))
-        num3 = operate(operator, +numString1, +numString2);
-        calcDisplay.innerHTML = num3;
-    }
-    else if (isNaN(opReturn) && opReturn !== '=') {
-        operator = e.target.innerHTML;
-        operatorChosen = true;
-        
-        //add switch for special operations?
-        if (e.target.innerHTML === 'C') {
-            reset();
-        }
+        console.log('here1' + operate(operator, +numString1, +numString2))
+        result = operate(operator, +numString1, +numString2);
+        calcDisplay.innerHTML = result;
     }
 
+    //case2
+    else if (operatorChosen === true && result === undefined && num2 !== undefined) {
+        console.log('here2' + operate(operator, +numString1, +numString2))
+        result = operate(operator, +numString1, +numString2);
+        calcDisplay.innerHTML = result;
+    }
+
+    //case3
+    // else if (operatorChosen === true && result === undefined && num2 !== undefined) {
+    //     console.log('here3' + operate(operator, +numString1, +numString2))
+    //     result = operate(operator, +numString1, +numString2);
+    //     calcDisplay.innerHTML = result;
+    // }
+
+    //case-end
+    else if (isNaN(opReturn) && opReturn !== '=') {
+        //need to do some work on resetting things to keep the loop going and saving the value before reset
+        if (operatorChosen === true) {
+            operator = e.target.innerHTML;
+            operatorChosen = false;
+       }
+
+       else if (operatorChosen !== true) {
+        operator = e.target.innerHTML;
+        operatorChosen = true;
+       }
+        
+        //add switch for special operations?
+        else if (e.target.innerHTML === 'C') {
+            reset();
+        }
+
+    }
+    //handles logic for populating the display
     else if (!isNaN(opReturn)){
         //first pass
         if ((typeof num1 === 'undefined') && (typeof num2 === 'undefined') && (operatorChosen === false)) {
@@ -59,7 +85,8 @@ function operatorChoice(e) {
             calcDisplay.innerHTML = num2;
             numString2 = num2.toString();
         } 
-        //additional passes until length reach 10
+
+        //additional passes until length reach 10 and equals not chosen
         else if (numString2.length < 10) {
             num2 = +e.target.innerHTML;
             let temp = num2.toString();
@@ -70,7 +97,7 @@ function operatorChoice(e) {
         //nothing happens if more than 9 digits are added to second value
         else if (numString2 >= 10) {
             //nothing happens
-            console.log('what2')
+            console.log('numstring22')
             console.log(num1)
             console.log(num2)
             console.log(numString1)
@@ -79,7 +106,7 @@ function operatorChoice(e) {
 
         //handles all other cases
         else {
-            console.log('what')
+            console.log('HMM')
         }
     }
 }
@@ -89,7 +116,7 @@ function reset() {
     operatorChosen = false;
     num1 = undefined;
     num2 = undefined;
-    num3 = undefined;
+    result = undefined;
     calcDisplay.innerHTML = '|';
     numString1 = '';
     numString2 = '';
