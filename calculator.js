@@ -18,6 +18,18 @@ function reset() {
     num1 = undefined;
     num2 = undefined;
     result = undefined;
+    nextResult = undefined;
+    calcDisplay.innerHTML = '|';
+    numString1 = '';
+    numString2 = '';
+}
+
+function clear() {
+    operator = '';
+    operatorChosen = false;
+    num1 = undefined;
+    num2 = undefined;
+    result = undefined;
     calcDisplay.innerHTML = '|';
     numString1 = '';
     numString2 = '';
@@ -25,13 +37,17 @@ function reset() {
 
 function operatorChoice(e) {
     const opReturn = e.target.innerHTML;
+
+    if (e.target.innerHTML === 'C') {
+        reset();
+    }
     
     //case1 - person selects first num, chooses operator, selects second num, hits equals
-    if (opReturn === '=' && operatorChosen === true && (num1 !== undefined && num2 !== undefined)) {
+    else if (opReturn === '=' && operatorChosen === true && (num1 !== undefined && num2 !== undefined)) {
         console.log('here1 ' + operate(operator, +numString1, +numString2))
         result = operate(operator, +numString1, +numString2);
         let temp = result;
-        reset();
+        clear();
         calcDisplay.innerHTML = temp;
         nextResult = temp;
     }
@@ -41,14 +57,16 @@ function operatorChoice(e) {
         console.log('here2 ' + operate(operator, +numString1, +numString2))
         result = operate(operator, +numString1, +numString2);
         let temp = result;
-        reset();
+        clear();
         calcDisplay.innerHTML = temp;
         nextResult = temp;
     }
 
-    //case3 - result is not undefined so the cycle must be repeatable
-    else if (nextResult !== undefined) {
+    //case3 - nextresult is not undefined so the cycle must be repeatable
+    else if (nextResult !== undefined && e.target.innerHTML !== 'C') {
         console.log('here3 ')
+        console.log(e.target.innerHTML)
+
 
     }
 
@@ -69,9 +87,7 @@ function operatorChoice(e) {
        }
         
         //add switch for special operations?
-        else if (e.target.innerHTML === 'C') {
-            reset();
-        }
+        
 
     }
     //handles logic for populating the display
