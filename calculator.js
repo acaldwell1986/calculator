@@ -3,6 +3,13 @@ const calcDisplay = document.querySelector('div.calc-display');
 
 buttons.forEach(button => { button.addEventListener('click', operatorChoice) });
 
+
+// TODO: 
+// -set up seperate listeners for the buttons-
+// -rewrite this mofo
+
+
+
 let operator = '';
 let operatorChosen = false;
 let num1;
@@ -78,7 +85,7 @@ function operatorChoice(e) {
     //     calcDisplay.innerHTML = result;
     // }
 
-    //case-end-catchall
+    //case-end - retrieves the operator value for processing two numbers
     else if (isNaN(opReturn) && opReturn !== '=') {
 
         //need to do some work on resetting things to keep the loop going and saving the value before reset
