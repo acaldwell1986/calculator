@@ -25,21 +25,48 @@
 //         numString1 = num1.toString();
 //     } 
 
-const buttons = document.querySelectorAll('button');
+const numButtons = document.querySelectorAll('button.number-button');
+const operatorButtons = document.querySelectorAll('button.operator-button');
+const specialButtons = document.querySelectorAll('button.special-button');
+const clearButton = document.querySelectorAll('button.clear-button')
+const equalButton = document.querySelectorAll('button.equal-button')
+const decimalButton = document.querySelectorAll('button.decimal-button')
+
 const calcDisplay = document.querySelector('div.calc-display');
 
-buttons.forEach(button => { button.addEventListener('click', operatorChoice) });
+numButtons.forEach(button => { button.addEventListener('click', main) });
 
-
+operatorButtons.forEach(button => { button.addEventListener('click', onClicker) });
+specialButtons.forEach(button => { button.addEventListener('click', onClicker) });
+clearButton.forEach(button => { button.addEventListener('click', onClicker) });
+equalButton.forEach(button => { button.addEventListener('click', onClicker) });
+decimalButton.forEach(button => { button.addEventListener('click', onClicker) });
 
 let operator = '';
 let operatorChosen = false;
-let num1;
+let num1 = 0;
 let num2;
-let result;
 let nextResult; 
 let numString1 = '';
 let numString2 = '';
+
+
+
+function main(e) {
+    if (num1.toString.length < 10) {
+        num1 = +e.target.innerHTML;
+        console.log(num1);
+        calcDisplay.innerHTML = num1;
+        numString1 = num1.toString();
+    }
+}
+
+
+function onClicker(e) {
+    console.log(e.target.innerHTML);
+}
+
+
 
 
 
