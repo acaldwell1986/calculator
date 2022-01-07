@@ -46,8 +46,9 @@ let numString2 = '';
 
 /// on operator click (rewrite operatorselect function)
 // 1. If first undefined, nothing. (user clicks operator before selecting any number)
-// 2. Get number. If second is undefined, move first to second.
-// 3. Get number. Save 'second' to temp. Perform operation with input as 'first' and using temp variable and save result to second.
+// 2. Get number. If second is undefined, assign input to second.
+// 3. Get number. Save 'second' to temp. Perform operation with input as 'first' and 
+//     using temp variable and save result to second.
 
 
 
