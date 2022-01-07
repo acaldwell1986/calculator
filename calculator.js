@@ -46,12 +46,12 @@ let numString2 = '';
 
 /// on operator click (rewrite operatorselect function)
 // 1. If first undefined, nothing. (user clicks operator before selecting any number)
-// 2. Get number. If second is undefined, assign input to second.
-// 3. Get number. Save 'second' to temp. Perform operation with input as 'first' and 
+// 2. If second is undefined,Get number. assign input to second. 
+// 3.  If second is defined - Get number. Save 'second' to temp. Perform operation with input from getnum as 'first' and 
 //     using temp variable and save result to second.
 
 
-
+// get number functino that just returns the users number before any other type of button is clicked
 
 
 function operatorSelect(e) {
