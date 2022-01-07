@@ -1,29 +1,8 @@
-
-
-
 // TODO: 
-// -set up seperate listeners for the buttons-
 // -rewrite this mofo
 
 
-// if (operatorChosen !== true) {
-//     operator = e.target.innerHTML;
-//     operatorChosen = true;
-//    }
-    
-//     //add switch for special operations?
-    
 
-// }
-// //handles logic for populating the display
-// else if (!isNaN(opReturn)){
-//     //first pass
-//     if ((typeof first === 'undefined') && (typeof second === 'undefined') && (operatorChosen === false)) {
-//         first = +e.target.innerHTML;
-//         console.log(first);
-//         calcDisplay.innerHTML = first;
-//         numString1 = first.toString();
-//     } 
 
 const numButtons = document.querySelectorAll('button.number-button');
 const operatorButtons = document.querySelectorAll('button.operator-button');
@@ -44,32 +23,81 @@ clearButton.forEach(button => { button.addEventListener('click', reset) });
 equalButton.forEach(button => { button.addEventListener('click', onClicker) });
 decimalButton.forEach(button => { button.addEventListener('click', onClicker) });
 
+function reset() {
+    operator = '';
+    numberMove = false;
+    first = 0;
+    second = undefined;
+    numString1 = '';
+    numString2 = '';
+    calcDisplay.innerHTML = "|";
+    console.clear();
+}
+
 let operator = '';
 let numberMove = false;
 let first = 0;
 let second;
+let result;
 let numString1 = '';
 let numString2 = '';
 
 function operatorSelect(e) {
     operator = e.target.innerHTML;
+
     
-    //first and second values have been previously calculated
-    if (numberMove === false && second !== undefined) {
 
-    }
-    
-    
-    //first value entered, no second value yet. 
-    else if (numberMove === false && second === undefined) {
+    //need case for numbermove false and secone not undefiend?
 
-    }
+        //second has been declared perhaps move calculation to herE?
 
-
-    //no values entered yet, person clicks operator
-    else if (numberMove === false && second !== undefined && first === 0) {
+    //1first and second values have been entered
+    if (numberMove === true && second !== undefined) {
+        console.log("case 1 begin - first is " + first + " " + " - second is " + second)
+        let temp;
+        temp = operate(operator,first,second);
+        console.log('first: ' + temp)
+        calcDisplay.innerHTML = temp;
+        second = temp;
+        numberMove = false;
+        numString1 = '';
+        console.log("case 1 end - first is " + first + " " + " - second is " + second)
         
     }
+    
+    else if (numberMove === false && second !== undefined) {
+        console.log("case 1.5 - first is " + first + " " + " - second is " + second)
+        let temp;
+        temp = operate(operator,first,second);
+        console.log('first: ' + temp)
+        calcDisplay.innerHTML = temp;
+        second = temp;
+        numString2 = '';
+        console.log("case 1.5 end - first is " + first + " " + " - second is " + second)
+        numberMove=true;
+    }
+
+    //2no values entered yet, person clicks operator
+    else if (numberMove === false && second === undefined && first === 0) {
+        console.log('case 2')
+    }
+
+    //3first value entered, no second value yet. 
+    else if (numberMove === false && second === undefined) {
+        console.log('case 3')
+        numberMove = true;
+        console.log("case 3 end - first is " + first + " " + " - second is " + second)
+
+        //second has been declared perhaps move calculation to herE?
+    }
+
+    //4first and second values previously calculated
+
+    else {
+        console.log('case 4')
+    }
+
+    console.log("Display:" + calcDisplay.innerHTML)
 }
 
 function getNumbers(e) {
@@ -81,7 +109,8 @@ function getNumbers(e) {
         calcDisplay.innerHTML = numString1;
         first = parseFloat(numString1)
         console.log(first)
-        numberMove = true; // probably need to move to function that handles operator buttons
+        console.log("GET THE NUMBERS 1 - first is " + first + " " + " - second is " + second)
+        // numberMove = true; // probably need to move to function that handles operator buttons
     } 
     else if (numString2.length < 9 && numberMove === true) {
         second = +e.target.innerHTML;
@@ -90,27 +119,16 @@ function getNumbers(e) {
         calcDisplay.innerHTML = numString2;
         second = parseFloat(numString2)
         console.log(second)
-        numberMove = false;
+        console.log("GET THE NUMBERS 2 - first is " + first + " " + " - second is " + second)
+        // numberMove = false;
     }
     else {
         console.log('here')
     }
 }
 
-
 function onClicker(e) {
     console.log(e.target.innerHTML);
-}
-
-function reset() {
-    operator = '';
-    numberMove = false;
-    first = 0;
-    second;
-    numString1 = '';
-    numString2 = '';
-    calcDisplay.innerHTML = "|";
-    console.clear();
 }
 
 function add(a,b) {
