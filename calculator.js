@@ -18,11 +18,11 @@
 // //handles logic for populating the display
 // else if (!isNaN(opReturn)){
 //     //first pass
-//     if ((typeof num1 === 'undefined') && (typeof num2 === 'undefined') && (operatorChosen === false)) {
-//         num1 = +e.target.innerHTML;
-//         console.log(num1);
-//         calcDisplay.innerHTML = num1;
-//         numString1 = num1.toString();
+//     if ((typeof first === 'undefined') && (typeof second === 'undefined') && (operatorChosen === false)) {
+//         first = +e.target.innerHTML;
+//         console.log(first);
+//         calcDisplay.innerHTML = first;
+//         numString1 = first.toString();
 //     } 
 
 const numButtons = document.querySelectorAll('button.number-button');
@@ -34,30 +34,66 @@ const decimalButton = document.querySelectorAll('button.decimal-button')
 
 const calcDisplay = document.querySelector('div.calc-display');
 
-numButtons.forEach(button => { button.addEventListener('click', main) });
+numButtons.forEach(button => { button.addEventListener('click', getNumbers) });
 
-operatorButtons.forEach(button => { button.addEventListener('click', onClicker) });
+operatorButtons.forEach(button => { button.addEventListener('click', operatorSelect) });
+
 specialButtons.forEach(button => { button.addEventListener('click', onClicker) });
-clearButton.forEach(button => { button.addEventListener('click', onClicker) });
+
+clearButton.forEach(button => { button.addEventListener('click', reset) });
 equalButton.forEach(button => { button.addEventListener('click', onClicker) });
 decimalButton.forEach(button => { button.addEventListener('click', onClicker) });
 
 let operator = '';
-let operatorChosen = false;
-let num1 = 0;
-let num2;
-let nextResult; 
+let numberMove = false;
+let first = 0;
+let second;
 let numString1 = '';
 let numString2 = '';
 
+function operatorSelect(e) {
+    operator = e.target.innerHTML;
+    
+    //first and second values have been previously calculated
+    if (numberMove === false && second !== undefined) {
+
+    }
+    
+    
+    //first value entered, no second value yet. 
+    else if (numberMove === false && second === undefined) {
+
+    }
 
 
-function main(e) {
-    if (num1.toString.length < 10) {
-        num1 = +e.target.innerHTML;
-        console.log(num1);
-        calcDisplay.innerHTML = num1;
-        numString1 = num1.toString();
+    //no values entered yet, person clicks operator
+    else if (numberMove === false && second !== undefined && first === 0) {
+        
+    }
+}
+
+function getNumbers(e) {
+
+    if (numString1.length < 9 && numberMove === false) {
+        first = +e.target.innerHTML;
+        let temp = first.toString();
+        numString1 = temp.concat('', numString1);
+        calcDisplay.innerHTML = numString1;
+        first = parseFloat(numString1)
+        console.log(first)
+        numberMove = true; // probably need to move to function that handles operator buttons
+    } 
+    else if (numString2.length < 9 && numberMove === true) {
+        second = +e.target.innerHTML;
+        let temp = second.toString();
+        numString2 = temp.concat('', numString2);
+        calcDisplay.innerHTML = numString2;
+        second = parseFloat(numString2)
+        console.log(second)
+        numberMove = false;
+    }
+    else {
+        console.log('here')
     }
 }
 
@@ -66,9 +102,16 @@ function onClicker(e) {
     console.log(e.target.innerHTML);
 }
 
-
-
-
+function reset() {
+    operator = '';
+    numberMove = false;
+    first = 0;
+    second;
+    numString1 = '';
+    numString2 = '';
+    calcDisplay.innerHTML = "|";
+    console.clear();
+}
 
 function add(a,b) {
     return a+b;
@@ -92,19 +135,19 @@ function divide(a,b) {
         return +quotient;
 }
 
-function operate(operator, num1, num2) {
-    console.log(operator, num1, num2)
+function operate(operator, first, second) {
+    console.log(operator, first, second)
     switch (operator) {
         case `+`:
-            return add(num1,num2)
+            return add(first,second)
         case `-`:
-            return subtract(num1,num2)
+            return subtract(first,second)
         case `*`:
-            return multiply(num1,num2)
+            return multiply(first,second)
         case `x`:
-            return multiply(num1,num2)
+            return multiply(first,second)
         case `/`:
-            return divide(num1,num2)
+            return divide(first,second)
         default:
             return `OPERR`
     }
