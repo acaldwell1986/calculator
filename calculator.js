@@ -24,8 +24,26 @@ equalButton.addEventListener('click', equal);
 
 function specialApply(e) {
     if (e.target.innerHTML = '%') {
-        let display = document.getElementById('display')
-        console.log(display.innerHTML)
+        
+        if (firstActive === true) {
+            console.log('hey1');
+            first = first /100;
+            calcDisplay.innerHTML = first;
+            console.log('FLAG: ' + firstActive);
+
+        } 
+        
+        else if (firstActive === false) {
+            console.log('hey2');
+            second = second/100;
+            calcDisplay.innerHTML = second;
+            console.log('FLAG: ' + firstActive);
+        }
+
+        else {console.log('hey3');}
+
+
+
     //     if (first === undefined) {
     //         console.log('do nothing yet')
     //     } 
@@ -47,7 +65,7 @@ function specialApply(e) {
 
 function reset() {
     operator = '';
-    numberMove = false;
+    firstActive = false;
     first = undefined;
     second = undefined;
     numString = '';
@@ -56,9 +74,10 @@ function reset() {
 }
 
 let operator = '';
-let numberMove = false;
+let firstActive = false;  //used to track if first is active in display
 let first;
 let second;
+let result;
 let numString = '';
 
 
@@ -71,12 +90,14 @@ function equal() {
         let temp = second;
         second = operate(operator,first,temp)
         calcDisplay.innerHTML = second;
+        console.log('FLAG: ' + firstActive);
         numString = '';
         first = undefined;
+        firstActive = false;
     }
 }
 
-/// on operator click (rewrite operatorselect function)
+/// on operator click (rewrite operatorselect function) REWRITE TO INCLUDE RESULT VARIABLE
 // 1. If first undefined, nothing. (user clicks operator before selecting any number)
 // 2. If second is undefined,Get number. assign input to second. 
 // 3.  If second is defined - Get number. Save 'second' to temp. Perform operation with input from getnum as 'first' and 
@@ -91,9 +112,11 @@ function operatorSelect(e) {
     else if (second === undefined) {
         console.log('case2');
         second = first;
+        result = first;
         numString = '';
         first = undefined;
-        console.log("GET THE NUMBERS - first is " + first + " " + " - second is " + second)  
+        console.log("GET THE NUMBERS - first is " + first + " " + " - second is " + second + " - flag is " + firstActive)  
+        firstActive = false;
 
     }
     else if (second !== undefined) {
@@ -101,14 +124,20 @@ function operatorSelect(e) {
         let temp = second;
         second = operate(operator,first,temp);
         calcDisplay.innerHTML = second;
-        console.log("GET THE NUMBERS - first is " + first + " " + " - second is " + second)  
+        console.log('FLAG: ' + firstActive);
+        console.log("GET THE NUMBERS - first is " + first + " " + " - second is " + second + " - flag is " + firstActive)  
         numString = '';
         first = undefined;
+        firstActive = false;
     }
     else{
         console.log('case4');
     }
 }
+
+//ENTER NUMBER FUNCTION... enters number into display and stops if length > 9
+
+//get number will then retrieve what is in display and reset the string value? sitll need to think this
 
 // get number functino that just returns the users number before any other type of button is clicked
 
@@ -119,10 +148,12 @@ function getNumber(e) {
         let temp = first.toString();
         numString = temp.concat('', numString);
         calcDisplay.innerHTML = numString;
+        console.log('FLAG: ' + firstActive);
         first = parseFloat(numString)
         console.log(first)
         console.log(second)
-        console.log("GET THE NUMBERS - first is " + first + " " + " - second is " + second)  
+        console.log("GET THE NUMBERS - first is " + first + " " + " - second is " + second + " - flag is " + firstActive)  
+        firstActive = true;
     } 
 
 }
@@ -212,6 +243,7 @@ function getNumber(e) {
 //         console.log('here')
 //     }
 // }
+
 
 function onClicker(e) {
     console.log(e.target.innerHTML);
