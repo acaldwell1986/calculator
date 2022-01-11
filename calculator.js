@@ -1,7 +1,13 @@
 // TODO: 
 // -rewrite this mofo
 
-
+let firstOperator = undefined;
+let secondOperator = undefined;
+let first;
+let numString = '';
+let second;
+let result;
+let numInput;
 
 
 const numButtons = document.querySelectorAll('button.number-button');
@@ -11,6 +17,8 @@ const clearButton = document.querySelectorAll('button.clear-button')
 const equalButton = document.querySelector('button.equal-button')
 const decimalButton = document.querySelector('button.decimal-button')
 const calcDisplay = document.querySelector('div.calc-display');
+
+
 //decimalButton.addEventListener('click', decimalApply);
 numButtons.forEach(button => { button.addEventListener('click', getNumber) });
 
@@ -22,19 +30,6 @@ clearButton.forEach(button => { button.addEventListener('click', reset) });
 equalButton.addEventListener('click', equal);
 //decimalButton.addEventListener('click', decimalApply);
 
-
-function getNumber(e) {
-
-    if (numString.length < 9) {
-        numInput = +e.target.innerHTML;
-        let temp = numInput.toString();
-        numString = temp.concat('', numString);
-        calcDisplay.innerHTML = numString;
-        numInput = parseFloat(numString)
-        console.log(numString);
-    } 
-
-}
 
 function specialApply(e) {
     if (e.target.innerHTML = '%') {
@@ -55,26 +50,19 @@ function specialApply(e) {
         }
 
         else {console.log('hey3');}
-
-
-
-    //     if (first === undefined) {
-    //         console.log('do nothing yet')
-    //     } 
-    //     else if (first !== undefined && second === undefined) {
-    //         first = first /100;
-    //         calcDisplay.innerHTML = first;
-    //         console.log(first)
-    //     }
-    //     else if (first !== undefined && second !== undefined) {
-    //         second = second / 100;
-    //         calcDisplay.innerHTML = second;
-    //         console.log(second);
-    //     }
     }
-    // else if (e.target.innerHTML = '-/+') {
-    //     if (first === undefined)
-    // }
+}
+
+
+function getNumber(e) {
+    if (numString.length < 9) {
+        numInput = +e.target.innerHTML; 
+        let temp = numInput.toString(); 
+        numString = numString.concat('', temp); 
+        calcDisplay.innerHTML = numString; 
+        numInput = parseFloat(numString) 
+        console.log(numString); 
+    } 
 }
 
 function reset() {
@@ -88,15 +76,6 @@ function reset() {
     result = undefined;
     console.clear();
 }
-
-let firstOperator = undefined;
-let secondOperator = undefined;
-let first;
-let numString = '';
-let second;
-let result;
-let numInput;
-
 
 
 function equal() {
@@ -137,6 +116,7 @@ function equal() {
 }
 
 function operatorSelect(e) {
+    
     debugVar();
     if (first === undefined && numInput === undefined) {
         console.log('nothing happens, no numinput');
@@ -204,13 +184,6 @@ function debugVar() {
     console.log('First: ' + first + ' First Operator: ' + firstOperator + ' Second: ' + second + ' Second Operator: ' + secondOperator + ' Result: ' + result);
 }
 
-
-
-
-
-
-
-
 function onClicker(e) {
     console.log(e.target.innerHTML);
 }
@@ -229,12 +202,12 @@ function multiply(a,b) {
 
 function divide(a,b) {
     let quotient;
-    if (b === 0) {
+    if (a === 0) {
         return "ERR"
         //remove event listeners from all buttons but C
     }
     else {
-        quotient = (a/b)
+        quotient = (b/a)
         console.log(quotient)
         return +quotient;
     }
