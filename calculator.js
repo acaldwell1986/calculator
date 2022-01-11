@@ -12,7 +12,7 @@ let numInput;
 
 const numButtons = document.querySelectorAll('button.number-button');
 const operatorButtons = document.querySelectorAll('button.operator-button');
-const specialButtons = document.querySelectorAll('button.special-button');
+//const specialButtons = document.querySelectorAll('button.special-button');
 const clearButton = document.querySelectorAll('button.clear-button')
 const equalButton = document.querySelector('button.equal-button')
 const decimalButton = document.querySelector('button.decimal-button')
@@ -24,34 +24,34 @@ numButtons.forEach(button => { button.addEventListener('click', getNumber) });
 
 operatorButtons.forEach(button => { button.addEventListener('click', operatorSelect) });
 
-specialButtons.forEach(button => { button.addEventListener('click', specialApply) });
+//specialButtons.forEach(button => { button.addEventListener('click', specialApply) });
 
 clearButton.forEach(button => { button.addEventListener('click', reset) });
 equalButton.addEventListener('click', equal);
 //decimalButton.addEventListener('click', decimalApply);
 
 
-function specialApply(e) {
-    if (e.target.innerHTML = '%') {
+// function specialApply(e) {
+//     if (e.target.innerHTML = '%') {
         
-        if (firstActive === true) {
-            console.log('hey1');
-            first = first /100;
-            calcDisplay.innerHTML = first;
-            console.log('FLAG: ' + firstActive);
+//         if (firstActive === true) {
+//             console.log('hey1');
+//             first = first /100;
+//             calcDisplay.innerHTML = first;
+//             console.log('FLAG: ' + firstActive);
 
-        } 
+//         } 
         
-        else if (firstActive === false) {
-            console.log('hey2');
-            second = second/100;
-            calcDisplay.innerHTML = second;
-            console.log('FLAG: ' + firstActive);
-        }
+//         else if (firstActive === false) {
+//             console.log('hey2');
+//             second = second/100;
+//             calcDisplay.innerHTML = second;
+//             console.log('FLAG: ' + firstActive);
+//         }
 
-        else {console.log('hey3');}
-    }
-}
+//         else {console.log('hey3');}
+//     }
+// }
 
 
 function getNumber(e) {
@@ -137,17 +137,26 @@ function operatorSelect(e) {
         debugVar();
     }
 
+    else if (numInput !== undefined && first !== undefined && firstOperator === undefined && second === undefined && secondOperator === undefined && result === undefined) {
+        firstOperator = e.target.innerHTML
+        first = numInput;
+        getNumberReset();
+        console.log('Case 2c');
+    }
+
     else if (numInput === undefined && second === undefined && secondOperator === undefined && result === undefined && first !== undefined && firstOperator !== undefined) {
         firstOperator = e.target.innerHTML;
         console.log('Case 3');
     }
 
-    else if (numInput !== undefined && second === undefined && secondOperator === undefined && result === undefined) {
+    else if (numInput !== undefined && first!== undefined && firstOperator !== undefined && second === undefined && secondOperator === undefined && result === undefined) {
+        debugVar();
         second = numInput;
         secondOperator = e.target.innerHTML;
         getNumberReset();
         result = operate(firstOperator, first, second)
         calcDisplay.innerHTML = result;
+        debugVar();
         console.log('Case 4');
         debugVar();
     }
@@ -232,6 +241,8 @@ function operate(operator, first, second) {
         case `/`:
             return divide(first,second)
         default:
+            debugVar();
+            console.log(numInput)
             return `OPERR`
             //remove event listeners except C button
     }
