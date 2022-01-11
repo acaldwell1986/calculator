@@ -1,196 +1,204 @@
-const buttons = document.querySelectorAll('button');
-const calcDisplay = document.querySelector('div.calc-display');
-
-buttons.forEach(button => { button.addEventListener('click', operatorChoice) });
-
-
 // TODO: 
-// -set up seperate listeners for the buttons-
 // -rewrite this mofo
 
+let firstOperator = undefined;
+let secondOperator = undefined;
+let first;
+let numString = '';
+let second;
+let result;
+let numInput;
 
-// if (operatorChosen !== true) {
-//     operator = e.target.innerHTML;
-//     operatorChosen = true;
-//    }
-    
-//     //add switch for special operations?
-    
-
-// }
-// //handles logic for populating the display
-// else if (!isNaN(opReturn)){
-//     //first pass
-//     if ((typeof num1 === 'undefined') && (typeof num2 === 'undefined') && (operatorChosen === false)) {
-//         num1 = +e.target.innerHTML;
-//         console.log(num1);
-//         calcDisplay.innerHTML = num1;
-//         numString1 = num1.toString();
-//     } 
 
 const numButtons = document.querySelectorAll('button.number-button');
 const operatorButtons = document.querySelectorAll('button.operator-button');
-const specialButtons = document.querySelectorAll('button.special-button');
+//const specialButtons = document.querySelectorAll('button.special-button');
 const clearButton = document.querySelectorAll('button.clear-button')
-const equalButton = document.querySelectorAll('button.equal-button')
-const decimalButton = document.querySelectorAll('button.decimal-button')
-
+const equalButton = document.querySelector('button.equal-button')
+const decimalButton = document.querySelector('button.decimal-button')
 const calcDisplay = document.querySelector('div.calc-display');
 
-numButtons.forEach(button => { button.addEventListener('click', main) });
 
-operatorButtons.forEach(button => { button.addEventListener('click', onClicker) });
-specialButtons.forEach(button => { button.addEventListener('click', onClicker) });
-clearButton.forEach(button => { button.addEventListener('click', onClicker) });
-equalButton.forEach(button => { button.addEventListener('click', onClicker) });
-decimalButton.forEach(button => { button.addEventListener('click', onClicker) });
+//decimalButton.addEventListener('click', decimalApply);
+numButtons.forEach(button => { button.addEventListener('click', getNumber) });
 
-let operator = '';
-let operatorChosen = false;
-let num1 = 0;
-let num2;
-let result;
-let nextResult; //not affected by reset
-let nextResult; 
-let numString1 = '';
-let numString2 = '';
+operatorButtons.forEach(button => { button.addEventListener('click', operatorSelect) });
+
+//specialButtons.forEach(button => { button.addEventListener('click', specialApply) });
+
+clearButton.forEach(button => { button.addEventListener('click', reset) });
+equalButton.addEventListener('click', equal);
+//decimalButton.addEventListener('click', decimalApply);
+
+
+// function specialApply(e) {
+//     if (e.target.innerHTML = '%') {
+        
+//         if (firstActive === true) {
+//             console.log('hey1');
+//             first = first /100;
+//             calcDisplay.innerHTML = first;
+//             console.log('FLAG: ' + firstActive);
+
+//         } 
+        
+//         else if (firstActive === false) {
+//             console.log('hey2');
+//             second = second/100;
+//             calcDisplay.innerHTML = second;
+//             console.log('FLAG: ' + firstActive);
+//         }
+
+//         else {console.log('hey3');}
+//     }
+// }
+
+
+function getNumber(e) {
+    if (numString.length < 9) {
+        numInput = +e.target.innerHTML; 
+        let temp = numInput.toString(); 
+        numString = numString.concat('', temp); 
+        calcDisplay.innerHTML = numString; 
+        numInput = parseFloat(numString) 
+        console.log(numString); 
+    } 
+}
 
 function reset() {
-    operator = '';
-    operatorChosen = false;
-    num1 = undefined;
-    num2 = undefined;
+    firstActive = false;
+    first = undefined;
+    second = undefined;
+    numString = '';
+    calcDisplay.innerHTML = "|";
+    firstOperator = undefined;
+    secondOperator = undefined;
     result = undefined;
-    nextResult = undefined;
-    calcDisplay.innerHTML = '|';
-    numString1 = '';
-    numString2 = '';
+    console.clear();
 }
 
-function clear() {
-    operator = '';
-    operatorChosen = false;
-    num1 = undefined;
-    num2 = undefined;
-    result = undefined;
-    calcDisplay.innerHTML = '|';
-    numString1 = '';
-    numString2 = '';
-}
 
-function operatorChoice(e) {
-    const opReturn = e.target.innerHTML;
-
-    //resets calculator if C is clicked
-    if (e.target.innerHTML === 'C') {
-        reset();
+function equal() {
+    if (numInput !== undefined && second === undefined && secondOperator === undefined && result === undefined) {
+        second = numInput;
+        debugVar()
+        getNumberReset();
+        result = operate(firstOperator, first, second);
+        calcDisplay.innerHTML = result;
+        first = result;
+        result = undefined;
+        second = undefined;
+        firstOperator = undefined;
+        console.log('here1')
+        debugVar()
+    } 
+    else if (numInput !== undefined && first !== undefined && second !== undefined && firstOperator !== undefined && secondOperator !== undefined && result !== undefined) {
+        first = result; // 27
+        firstOperator = secondOperator; //-
+        second = numInput; //5
+        getNumberReset();
+        secondOperator = undefined;
+        result = operate(firstOperator, first, second);
+        calcDisplay.innerHTML = result;
+        first = result;
+        result = undefined;
+        second = undefined;
+        firstOperator = undefined;
+        console.log('here2')
+        debugVar();
     }
+   
+    else {
+        console.log(numInput)
+        console.log('nothing happens, no equals');
+        debugVar();
+    }
+}
+
+function operatorSelect(e) {
     
-    //case1 - handles person selects first num, chooses operator, selects second num, hits equals
-    else if (opReturn === '=' && operatorChosen === true && (num1 !== undefined && num2 !== undefined)) {
-        console.log('here1 ' + operate(operator, +numString1, +numString2))
-        result = operate(operator, +numString1, +numString2);
-        let temp = result;
-        clear();
-        calcDisplay.innerHTML = temp;
-        nextResult = temp;
+    debugVar();
+    if (first === undefined && numInput === undefined) {
+        console.log('nothing happens, no numinput');
+        console.log('Case 1');
     }
 
-    //case2 - handles first and second num chosen, result not calculated yet
-    else if (operatorChosen === true && result === undefined && num2 !== undefined && nextResult === undefined) {
-        console.log('here2 ' + operate(operator, +numString1, +numString2))
-        result = operate(operator, +numString1, +numString2);
-        let temp = result;
-        clear();
-        calcDisplay.innerHTML = temp;
-        nextResult = temp;
+    else if (first === undefined && firstOperator === undefined && numInput !== undefined ) {
+        first = numInput;
+        firstOperator = e.target.innerHTML;
+        getNumberReset();
+        console.log('Case 2');
+        debugVar();
     }
 
-    //case3 - TODO: needs to restart the varibles or something
-    else if (nextResult !== undefined && e.target.innerHTML !== 'C') {
-        console.log('here3 ')
-        console.log(e.target.innerHTML)
-
-
+    else if (numInput === undefined && first !== undefined && firstOperator === undefined && second === undefined && secondOperator === undefined && result === undefined) {
+        firstOperator = e.target.innerHTML;
+        console.log('Case 2b');
+        debugVar();
     }
 
-    //case3 - result has been calculated, num1 and num2 must be reset to continue calculations to be used in conjunction with result
-    // else if (operatorChosen === true && result === undefined && num2 !== undefined) {
-    //     console.log('here3' + operate(operator, +numString1, +numString2))
-    //     result = operate(operator, +numString1, +numString2);
-    //     calcDisplay.innerHTML = result;
-    // }
-
-    //case-end - retrieves the operator value for processing two numbers
-    else if (isNaN(opReturn) && opReturn !== '=') {
-
-        //need to do some work on resetting things to keep the loop going and saving the value before reset
-     if (operatorChosen !== true) {
-        operator = e.target.innerHTML;
-        operatorChosen = true;
-       }
-        
-        //add switch for special operations?
-        
-
+    else if (numInput !== undefined && first !== undefined && firstOperator === undefined && second === undefined && secondOperator === undefined && result === undefined) {
+        firstOperator = e.target.innerHTML
+        first = numInput;
+        getNumberReset();
+        console.log('Case 2c');
     }
-    //handles logic for populating the display
-    else if (!isNaN(opReturn)){
-        //first pass
-        if ((typeof num1 === 'undefined') && (typeof num2 === 'undefined') && (operatorChosen === false)) {
-            num1 = +e.target.innerHTML;
-            console.log(num1);
-            calcDisplay.innerHTML = num1;
-            numString1 = num1.toString();
-        } 
 
-        //second pass once more than 1 digit is added
-        else if (typeof num2 === 'undefined' && operatorChosen === false && numString1.length < 10) {
-            num1 = +e.target.innerHTML;
-            let temp = num1.toString();
-            numString1 = temp.concat('', numString1);
-            calcDisplay.innerHTML = numString1;
-        }
+    else if (numInput === undefined && second === undefined && secondOperator === undefined && result === undefined && first !== undefined && firstOperator !== undefined) {
+        firstOperator = e.target.innerHTML;
+        console.log('Case 3');
+    }
 
-        //nothing happens if more than 9 digits are added to first value
-        else if (numString1.length >= 10 && operatorChosen === false) {
-            //nothing happens
-            console.log('what1')
-        }
-        //first digit added to second value
-        else if ((typeof num1 !== 'undefined') && (typeof num2 === 'undefined')) {
-            num2 = +e.target.innerHTML;
-            console.log(num2);
-            calcDisplay.innerHTML = num2;
-            numString2 = num2.toString();
-        } 
+    else if (numInput !== undefined && first!== undefined && firstOperator !== undefined && second === undefined && secondOperator === undefined && result === undefined) {
+        debugVar();
+        second = numInput;
+        secondOperator = e.target.innerHTML;
+        getNumberReset();
+        result = operate(firstOperator, first, second)
+        calcDisplay.innerHTML = result;
+        debugVar();
+        console.log('Case 4');
+        debugVar();
+    }
 
-        //additional passes until length reach 10 and equals not chosen
-        else if (numString2.length < 10) {
-            num2 = +e.target.innerHTML;
-            let temp = num2.toString();
-            numString2 = temp.concat('', numString2);
-            calcDisplay.innerHTML = numString2;
-        }
-        
-        //nothing happens if more than 9 digits are added to second value
-        else if (numString2 >= 10) {
-            //nothing happens
-            console.log('numstring2')
-            console.log(num1)
-            console.log(num2)
-            console.log(numString1)
-            console.log(numString2)
-        }
+    else if (numInput === undefined && first !== undefined && firstOperator !== undefined && second !== undefined && secondOperator !== undefined && result !== undefined) {
+        secondOperator = e.target.innerHTML;
+        console.log('Case 5');
+    }
 
-        //handles all other cases
-        else {
-            console.log('HMM')
-        }
+    else if (numInput !== undefined && first !== undefined && firstOperator !== undefined && second  !== undefined && secondOperator !== undefined && result !== undefined) {
+        first = result;
+        firstOperator = secondOperator;
+        second = numInput;
+        result = operate(firstOperator, first, second);
+        calcDisplay.innerHTML = result;
+        first = result;
+        firstOperator = e.target.innerHTML;
+        getNumberReset();
+        result = undefined;
+        secondOperator = undefined;
+        second  = undefined;
+        console.log('Case 6');
+    }
+    else {
+        console.log('Something happened.');
+        debugVar();
     }
 }
 
 
+function getNumberReset() {
+    numInput = undefined;
+    numString = '';
+}
+ 
+function debugVar() {
+    console.log('First: ' + first + ' First Operator: ' + firstOperator + ' Second: ' + second + ' Second Operator: ' + secondOperator + ' Result: ' + result);
+}
+
+function onClicker(e) {
+    console.log(e.target.innerHTML);
+}
 
 function main(e) {
     if (num1.toString.length < 10) {
@@ -215,6 +223,8 @@ function add(a,b) {
 }
 
 function subtract(a,b) {
+    console.log(a)
+    console.log(b);
     return a-b;
 }
 
@@ -226,27 +236,33 @@ function divide(a,b) {
     let quotient;
     if (b === 0) {
         return "ERR"
+        //remove event listeners from all buttons but C
     }
-    else 
-        quotient = (a/b).toFixed(6);
+    else {
+        quotient = (a/b)
+        console.log(quotient)
         return +quotient;
+    }
 }
 
-function operate(operator, num1, num2) {
-    console.log(operator, num1, num2)
+function operate(operator, first, second) {
+    console.log(operator +  "first: " + first + " second: " + second)
     switch (operator) {
         case `+`:
-            return add(num1,num2)
+            return add(first,second)
         case `-`:
-            return subtract(num1,num2)
+            return subtract(first,second)
         case `*`:
-            return multiply(num1,num2)
+            return multiply(first,second)
         case `x`:
-            return multiply(num1,num2)
+            return multiply(first,second)
         case `/`:
-            return divide(num1,num2)
+            return divide(first,second)
         default:
+            debugVar();
+            console.log(numInput)
             return `OPERR`
+            //remove event listeners except C button
     }
 }
 
