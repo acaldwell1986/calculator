@@ -80,17 +80,17 @@ function reset() {
 
 function equal() {
     if (numInput !== undefined && second === undefined && secondOperator === undefined && result === undefined) {
-        second = first;
-        first = numInput;
+        second = numInput;
+        debugVar()
         getNumberReset();
         result = operate(firstOperator, first, second);
         calcDisplay.innerHTML = result;
         first = result;
         result = undefined;
-        secondOperator = undefined;
+        second = undefined;
         firstOperator = undefined;
-        second  = undefined;
         console.log('here1')
+        debugVar()
     } 
     else if (numInput !== undefined && first !== undefined && second !== undefined && firstOperator !== undefined && secondOperator !== undefined && result !== undefined) {
         first = result; // 27
@@ -128,11 +128,13 @@ function operatorSelect(e) {
         firstOperator = e.target.innerHTML;
         getNumberReset();
         console.log('Case 2');
+        debugVar();
     }
 
     else if (numInput === undefined && first !== undefined && firstOperator === undefined && second === undefined && secondOperator === undefined && result === undefined) {
         firstOperator = e.target.innerHTML;
         console.log('Case 2b');
+        debugVar();
     }
 
     else if (numInput === undefined && second === undefined && secondOperator === undefined && result === undefined && first !== undefined && firstOperator !== undefined) {
@@ -171,6 +173,7 @@ function operatorSelect(e) {
     }
     else {
         console.log('Something happened.');
+        debugVar();
     }
 }
 
@@ -193,6 +196,8 @@ function add(a,b) {
 }
 
 function subtract(a,b) {
+    console.log(a)
+    console.log(b);
     return a-b;
 }
 
@@ -202,19 +207,19 @@ function multiply(a,b) {
 
 function divide(a,b) {
     let quotient;
-    if (a === 0) {
+    if (b === 0) {
         return "ERR"
         //remove event listeners from all buttons but C
     }
     else {
-        quotient = (b/a)
+        quotient = (a/b)
         console.log(quotient)
         return +quotient;
     }
 }
 
 function operate(operator, first, second) {
-    console.log(operator, first, second)
+    console.log(operator +  "first: " + first + " second: " + second)
     switch (operator) {
         case `+`:
             return add(first,second)
@@ -228,6 +233,7 @@ function operate(operator, first, second) {
             return divide(first,second)
         default:
             return `OPERR`
+            //remove event listeners except C button
     }
 }
 
