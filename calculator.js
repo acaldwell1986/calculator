@@ -11,6 +11,7 @@ let numInput;
 
 
 const numButtons = document.querySelectorAll('button.number-button');
+
 const operatorButtons = document.querySelectorAll('button.operator-button');
 //const specialButtons = document.querySelectorAll('button.special-button');
 const clearButton = document.querySelectorAll('button.clear-button')
@@ -18,10 +19,10 @@ const equalButton = document.querySelector('button.equal-button')
 const decimalButton = document.querySelector('button.decimal-button')
 const calcDisplay = document.querySelector('div.calc-display');
 
-
+//numButtons.forEach(button => { button.addEventListener('keydown', getNumber) });
 //decimalButton.addEventListener('click', decimalApply);
 numButtons.forEach(button => { button.addEventListener('click', getNumber) });
-
+console.log('gary')
 operatorButtons.forEach(button => { button.addEventListener('click', operatorSelect) });
 
 //specialButtons.forEach(button => { button.addEventListener('click', specialApply) });
@@ -29,6 +30,12 @@ operatorButtons.forEach(button => { button.addEventListener('click', operatorSel
 clearButton.forEach(button => { button.addEventListener('click', reset) });
 equalButton.addEventListener('click', equal);
 //decimalButton.addEventListener('click', decimalApply);
+
+const logger = document.getElementById('1-button');
+
+document.addEventListener('keydown', getNumber);
+
+
 
 
 // function specialApply(e) {
@@ -55,7 +62,9 @@ equalButton.addEventListener('click', equal);
 
 
 function getNumber(e) {
-    if (numString.length < 9) {
+    console.log(e);
+    console.log(+e.key)
+    if (numString.length < 9 && e.key === undefined) {
         numInput = +e.target.innerHTML; 
         let temp = numInput.toString(); 
         numString = numString.concat('', temp); 
@@ -63,6 +72,14 @@ function getNumber(e) {
         numInput = parseFloat(numString) 
         console.log(numString); 
     } 
+    else if (numString.length < 9) {
+        numInput = +e.key
+        let temp = numInput.toString(); 
+        numString = numString.concat('', temp); 
+        calcDisplay.innerHTML = numString; 
+        numInput = parseFloat(numString) 
+        console.log(numString); 
+    }
 }
 
 function reset() {
