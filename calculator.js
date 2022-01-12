@@ -22,7 +22,6 @@ const calcDisplay = document.querySelector('div.calc-display');
 //numButtons.forEach(button => { button.addEventListener('keydown', getNumber) });
 //decimalButton.addEventListener('click', decimalApply);
 numButtons.forEach(button => { button.addEventListener('click', getNumber) });
-console.log('gary')
 operatorButtons.forEach(button => { button.addEventListener('click', operatorSelect) });
 
 //specialButtons.forEach(button => { button.addEventListener('click', specialApply) });
@@ -59,7 +58,9 @@ document.addEventListener('keydown', getNumber);
 //         else {console.log('hey3');}
 //     }
 // }
-
+let number = 3;
+let isnum = /^\d+$/.test(number);
+console.log(/^\d+$/.test(3));
 
 function getNumber(e) {
     console.log(e);
@@ -72,7 +73,7 @@ function getNumber(e) {
         numInput = parseFloat(numString) 
         console.log(numString); 
     } 
-    else if (numString.length < 9) {
+    else if (numString.length < 9 && (/^\d+$/.test(e.key))) {
         numInput = +e.key
         let temp = numInput.toString(); 
         numString = numString.concat('', temp); 
