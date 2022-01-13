@@ -31,6 +31,7 @@ clearButton.forEach(button => { button.addEventListener('click', reset) });
 equalButton.addEventListener('click', equal);
 
 
+
 document.addEventListener('keydown', getNumber);
 
 
@@ -398,9 +399,9 @@ function operate(operator, first, second) {
         case `-`:
             return subtract(first,second)
         case `*`:
-            return multiply(first,second).toFixed(2)
+            return multiply(first,second)
         case `x`:
-            return multiply(first,second).toFixed(2)
+            return multiply(first,second)
         case `/`:
             return divide(first,second)
         default:
