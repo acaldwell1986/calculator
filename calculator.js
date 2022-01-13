@@ -10,11 +10,10 @@ let result;
 let numInput;
 let decimalAdded = false;
 
-
 const numButtons = document.querySelectorAll('button.number-button');
 
 const operatorButtons = document.querySelectorAll('button.operator-button');
-//const specialButtons = document.querySelectorAll('button.special-button');
+const specialButtons = document.querySelectorAll('button.special-button');
 const clearButton = document.querySelectorAll('button.clear-button')
 const equalButton = document.querySelector('button.equal-button')
 const decimalButton = document.querySelector('button.decimal-button')
@@ -25,37 +24,115 @@ decimalButton.addEventListener('click', getNumber);
 numButtons.forEach(button => { button.addEventListener('click', getNumber) });
 operatorButtons.forEach(button => { button.addEventListener('click', operatorSelect) });
 
-//specialButtons.forEach(button => { button.addEventListener('click', specialApply) });
+specialButtons.forEach(button => { button.addEventListener('click', specialApply) });
 
 clearButton.forEach(button => { button.addEventListener('click', reset) });
 equalButton.addEventListener('click', equal);
 
-
-
 document.addEventListener('keydown', getNumber);
 
 
-// function specialApply(e) {
-//     if (e.target.innerHTML = '%') {
+function specialApply(e) {
+    console.log((numInput / 100).toString().length);
+    if ((e.target.innerHTML === '%') && numString.length < 9 && ((numInput / 100).toString().length < 9)) {
         
-//         if (firstActive === true) {
-//             console.log('hey1');
-//             first = first /100;
-//             calcDisplay.innerHTML = first;
-//             console.log('FLAG: ' + firstActive);
-
-//         } 
-        
-//         else if (firstActive === false) {
-//             console.log('hey2');
-//             second = second/100;
-//             calcDisplay.innerHTML = second;
-//             console.log('FLAG: ' + firstActive);
-//         }
-
-//         else {console.log('hey3');}
-//     }
-// }
+        if (numInput !== undefined && first === undefined) {
+            console.log(numString.length);
+            numString = (numInput / 100).toString();
+            calcDisplay.innerHTML = numString;
+            console.log(numString);
+            numInput = parseFloat(numString);
+            console.log(numInput);
+            console.log(numString.length);
+            console.log('special apply case 2');
+        }
+        else if (numInput !== undefined && first !== undefined && firstOperator !== undefined) {
+            console.log(numString.length);
+            numString = (numInput / 100).toString();
+            calcDisplay.innerHTML = numString;
+            console.log(numString);
+            numInput = parseFloat(numString);
+            console.log(numInput);
+            console.log(numString.length);
+            console.log('special apply case 4');
+        }
+        else if (numInput === undefined && first !== undefined) {
+            numString = (first / 100).toString();
+            calcDisplay.innerHTML = numString;
+            console.log(numString);
+            numInput = parseFloat(numString);
+            console.log(numInput);
+            console.log(numString.length);
+            console.log('special apply case 6');
+        }
+    } 
+    else if (e.target.innerHTML === '-/+' && numString.length < 9 && ((numInput / 100).toString().length < 9)) {
+               
+        if (numInput !== undefined && first === undefined) {
+            if (Math.sign(numInput) === 1) {
+                numString = (numInput * -1).toString();
+                calcDisplay.innerHTML = numString;
+                console.log(numString);
+                numInput = parseFloat(numString);
+                console.log(numInput);
+                console.log(numString.length);
+                console.log('special apply case 2');
+            }
+            else {
+                numString = (numInput * -1);
+                calcDisplay.innerHTML = numString;
+                console.log(numString);
+                numInput = parseFloat(numString);
+                console.log(numInput);
+                console.log(numString.length);
+                console.log('special apply case 2a');
+            }
+        }
+        else if (numInput !== undefined && first !== undefined && firstOperator !== undefined) {
+            if (Math.sign(numInput) === 1) {
+                numString = (numInput * -1).toString();
+                calcDisplay.innerHTML = numString;
+                console.log(numString);
+                numInput = parseFloat(numString);
+                console.log(numInput);
+                console.log(numString.length);
+                console.log('special apply case 4');
+            }
+            else {
+                numString = (numInput * -1);
+                calcDisplay.innerHTML = numString;
+                console.log(numString);
+                numInput = parseFloat(numString);
+                console.log(numInput);
+                console.log(numString.length);
+                console.log('special apply case 4a');
+            }
+            
+            console.log('special apply case 4');
+        }
+        else if (numInput === undefined && first !== undefined) {
+            debugVar()
+            if (Math.sign(numInput) === 1) {
+                numString = (first * -1).toString();
+                calcDisplay.innerHTML = numString;
+                console.log(numString);
+                numInput = parseFloat(numString);
+                console.log(numInput);
+                console.log(numString.length);
+                console.log('special apply case 6');
+            }
+            else {
+                numString = (first * -1);
+                calcDisplay.innerHTML = numString;
+                console.log(numString);
+                numInput = parseFloat(numString);
+                console.log(numInput);
+                console.log(numString.length);
+                console.log('special apply case 6a');
+            }            
+        }
+    }  
+}
 
 console.log(decimalAdded);
 function getNumber(e) {
@@ -75,9 +152,14 @@ console.log(decimalAdded);
         }
     }
 
+    else if ((e.key === '.' || e.target.innerHTML === '.') && decimalAdded === false && numInput === undefined && first !== undefined && firstOperator !== undefined) {
+        
+        console.log('hey');
+        
+}
+
     else if ((e.key === '.' || e.target.innerHTML === '.') && decimalAdded === false && numInput === undefined && first !== undefined) {
             decimalAdded = true;
-            console.log('hey');
             numString = first.toString();
             first = undefined;
             console.log(numString);
@@ -86,12 +168,10 @@ console.log(decimalAdded);
             console.log(numString);
             numInput = parseFloat(numString).toFixed(1);
             console.log(numInput);
-            console.log('gary');
-        
     }
 
     else if (decimalAdded === true && numInput === undefined && e.key === '.' || e.target.innerHTML === '.') { 
-        console.log('gary');
+       
     }
 
     else if (decimalAdded === true || numInput === undefined) {        
@@ -135,7 +215,7 @@ console.log(decimalAdded);
             calcDisplay.innerHTML = numString; 
             numInput = parseFloat(numString) 
             console.log(numString); 
-            console.log('gary2');
+            
         } 
 
         else if (numString.length < 9 && (/^\d+$/.test(e.key))) {
@@ -181,6 +261,7 @@ function operatorSelect(e) {
             firstOperator = e.target.innerHTML;
             console.log('Case 2b');
             debugVar();
+            console.log(decimalAdded);
         }
 
         else if (numInput !== undefined && first !== undefined && firstOperator === undefined && second === undefined && secondOperator === undefined && result === undefined) {
@@ -188,6 +269,7 @@ function operatorSelect(e) {
             first = numInput;
             getNumberReset();
             console.log('Case 2c');
+            debugVar();
         }
 
         else if (numInput === undefined && second === undefined && secondOperator === undefined && result === undefined && first !== undefined && firstOperator !== undefined) {
@@ -315,6 +397,7 @@ function reset() {
     console.clear();
     numInput = undefined;
     decimalAdded = false;
+    
 }
 
 function equal() {
@@ -329,7 +412,7 @@ function equal() {
         second = undefined;
         firstOperator = undefined;
         console.log('here1')
-        debugVar()
+        debugVar();
     } 
     else if (numInput !== undefined && first !== undefined && second !== undefined && firstOperator !== undefined && secondOperator !== undefined && result !== undefined) {
         first = result; // 27
@@ -381,6 +464,10 @@ function multiply(a,b) {
 function divide(a,b) {
     let quotient;
     if (b === 0) {
+        reset();
+        debugVar();
+        console.log(numInput);
+        console.log('gary');
         return "ERR"
         //remove event listeners from all buttons but C
     }
@@ -399,14 +486,20 @@ function operate(operator, first, second) {
         case `-`:
             return subtract(first,second)
         case `*`:
-            return multiply(first,second)
+            let temp = multiply(first,second).toPrecision(9);
+            let temp2 = parseFloat(temp);
+            return temp2;
         case `x`:
-            return multiply(first,second)
+            let temp3 = multiply(first,second).toPrecision(9);
+            let temp4 = parseFloat(temp3);
+            return temp4;
+
         case `/`:
             return divide(first,second)
         default:
             debugVar();
             console.log(numInput)
+            reset();
             return `OPERR`
             //remove event listeners except C button
     }
