@@ -8,7 +8,7 @@ let numString = '';
 let second;
 let result;
 let numInput;
-let decimalAdded = false;
+let decimalAdded = false; 
 
 const numButtons = document.querySelectorAll('button.number-button');
 
