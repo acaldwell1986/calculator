@@ -8,6 +8,13 @@
     );
 }
 
+@keyframes bganimation 
+{
+    0% {background-position: left;}
+    50% {background-position: right;}
+    100% {background-position: left;}
+}
+
 body {
     display: flex;
     margin: 0;
@@ -17,15 +24,10 @@ body {
     min-height: 100vh;
     background-image: var(--gradient);
     background-size: 400%;
-    animation: bg-animation 5s infinite;
+    animation: bganimation 5s infinite;
 }
 
-@keyframes bg-animation 
-{
-    0% {background-position: left;}
-    50% {background-position: right;}
-    100% {background-position: left;}
-}
+
 
 .calc-container {
     min-width:400px;
