@@ -1,6 +1,7 @@
 
 :root {
-    --gradient: linear-gradient(90deg,
+    --gradient: linear-gradient(
+        90deg,
         #0b00ab,
         #070066,
         #040038,
@@ -16,14 +17,16 @@
       min-height: 100vh;
       background-image: var(--gradient);
       background-size: 400%;
-      animation: bg-animation 60s infinite;
+      animation: bg-animation 55s infinite;
   }
   
   @keyframes bg-animation 
   {
       0% {background-position: left;}
-      50% {background-position: right;}
-      100% {background-position: left;}
+      25% {background-position: right;}
+      50% {background-position: left;}
+      75% {background-position: right;}
+      100% {background-position: left;}  
     }
 
 
