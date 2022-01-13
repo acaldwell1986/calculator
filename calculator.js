@@ -20,7 +20,7 @@ const equalButton = document.querySelector('button.equal-button')
 const decimalButton = document.querySelector('button.decimal-button')
 const calcDisplay = document.querySelector('div.calc-display');
 
-//numButtons.forEach(button => { button.addEventListener('keydown', getNumber) });
+
 decimalButton.addEventListener('click', getNumber);
 numButtons.forEach(button => { button.addEventListener('click', getNumber) });
 operatorButtons.forEach(button => { button.addEventListener('click', operatorSelect) });
@@ -29,13 +29,9 @@ operatorButtons.forEach(button => { button.addEventListener('click', operatorSel
 
 clearButton.forEach(button => { button.addEventListener('click', reset) });
 equalButton.addEventListener('click', equal);
-//decimalButton.addEventListener('click', decimalApply);
 
-const logger = document.getElementById('1-button');
 
 document.addEventListener('keydown', getNumber);
-
-
 
 
 // function specialApply(e) {
@@ -65,13 +61,11 @@ function getNumber(e) {
 console.log(e.key);
 console.log(decimalAdded);
 
-
-
     if ((e.key === '.' || e.target.innerHTML === '.') && decimalAdded === false && numInput !== undefined) {
-        // decimalAdded = true;
+        
 
         if (numString.length < 9 && numInput !== undefined && (e.target.innerHTML === '.' || e.key === '.')) {
-            
+            decimalAdded = true;
             numString = numString.concat('', '.')
             calcDisplay.innerHTML = numString; 
             console.log(numString);
@@ -81,8 +75,8 @@ console.log(decimalAdded);
     }
 
     else if ((e.key === '.' || e.target.innerHTML === '.') && decimalAdded === false && numInput === undefined && first !== undefined) {
-        // decimalAdded = true;
-        console.log('hey');
+            decimalAdded = true;
+            console.log('hey');
             numString = first.toString();
             first = undefined;
             console.log(numString);
@@ -95,6 +89,10 @@ console.log(decimalAdded);
         
     }
 
+    else if (decimalAdded === true && numInput === undefined && e.key === '.' || e.target.innerHTML === '.') { 
+        console.log('gary');
+    }
+
     else if (decimalAdded === true || numInput === undefined) {        
 
         if (numString.length < 9 && e.key === undefined) {
@@ -104,7 +102,6 @@ console.log(decimalAdded);
             calcDisplay.innerHTML = numString; 
             numInput = parseFloat(numString);
             
-
         } 
 
         else if (numString.length < 9 && (/^\d+$/.test(e.key))) {
@@ -113,7 +110,6 @@ console.log(decimalAdded);
             numString = numString.concat('', temp); 
             calcDisplay.innerHTML = numString; 
             numInput = parseFloat(numString) 
-            
         }
         else if (e.key === '-' || e.key === '+' || e.key === '*' || e.key === '/') {
             console.log(e.key);
@@ -139,7 +135,6 @@ console.log(decimalAdded);
             numInput = parseFloat(numString) 
             console.log(numString); 
             console.log('gary2');
-
         } 
 
         else if (numString.length < 9 && (/^\d+$/.test(e.key))) {
@@ -308,7 +303,6 @@ function operatorSelect(e) {
     }
 }
 
-
 function reset() {
     first = undefined;
     second = undefined;
@@ -319,8 +313,8 @@ function reset() {
     result = undefined;
     console.clear();
     numInput = undefined;
+    decimalAdded = false;
 }
-
 
 function equal() {
     if (numInput !== undefined && firstOperator !== undefined && second === undefined && secondOperator === undefined && result === undefined) {
@@ -359,23 +353,15 @@ function equal() {
     }
 }
 
-
-
-
 function getNumberReset() {
     numInput = undefined;
     numString = '';
+    decimalAdded = false;
 }
  
 function debugVar() {
     console.log('First: ' + first + ' First Operator: ' + firstOperator + ' Second: ' + second + ' Second Operator: ' + secondOperator + ' Result: ' + result);
 }
-
-
-
-
-
-
 
 function add(a,b) {
     return a+b;
@@ -412,9 +398,9 @@ function operate(operator, first, second) {
         case `-`:
             return subtract(first,second)
         case `*`:
-            return multiply(first,second)
+            return multiply(first,second).toFixed(2)
         case `x`:
-            return multiply(first,second)
+            return multiply(first,second).toFixed(2)
         case `/`:
             return divide(first,second)
         default:
