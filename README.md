@@ -1,7 +1,7 @@
-## Project: Calculator
-# Description: On-screen calculator built using HTML, CSS, and Javascript. Calculates a single pair of numbers at a time.
+# Project: Calculator
+## Description: On-screen calculator built using HTML, CSS, and Javascript. Calculates a single pair of numbers at a time.
 
-#### **Features:**
+### **Features:**
 * Supported operations:  **divide**, **multiply**, **subtract**, **add**
 * Added **decimal button**
 * Displays error if attempting to divide by 0.
