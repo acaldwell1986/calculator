@@ -78,7 +78,6 @@ function specialApply(e) {
             
         }
         else if (numInput === undefined && first !== undefined) {
-            debugVar()
             if (Math.sign(numInput) === 1) {
                 numString = (first * -1).toString();
                 calcDisplay.innerHTML = numString;
@@ -183,6 +182,10 @@ function getNumber(e) {
         else if (e.key === 'Escape' || e.key === 'C' || e.key === 'c') {
             reset();
         }
+
+        else {
+            
+        }
     }
 }
 
@@ -196,19 +199,16 @@ function operatorSelect(e) {
             first = numInput;
             firstOperator = e.target.innerHTML;
             getNumberReset();
-            debugVar();
         }
 
         else if (numInput === undefined && first !== undefined && firstOperator === undefined && second === undefined && secondOperator === undefined && result === undefined) {
             firstOperator = e.target.innerHTML;
-            debugVar();
         }
 
         else if (numInput !== undefined && first !== undefined && firstOperator === undefined && second === undefined && secondOperator === undefined && result === undefined) {
             firstOperator = e.target.innerHTML
             first = numInput;
             getNumberReset();
-            debugVar();
         }
 
         else if (numInput === undefined && second === undefined && secondOperator === undefined && result === undefined && first !== undefined && firstOperator !== undefined) {
@@ -216,14 +216,11 @@ function operatorSelect(e) {
         }
 
         else if (numInput !== undefined && first!== undefined && firstOperator !== undefined && second === undefined && secondOperator === undefined && result === undefined) {
-            debugVar();
             second = numInput;
             secondOperator = e.target.innerHTML;
             getNumberReset();
             result = operate(firstOperator, first, second)
             calcDisplay.innerHTML = result;
-            debugVar();
-            debugVar();
         }
 
         else if (numInput === undefined && first !== undefined && firstOperator !== undefined && second !== undefined && secondOperator !== undefined && result !== undefined) {
@@ -242,9 +239,6 @@ function operatorSelect(e) {
             result = undefined;
             secondOperator = undefined;
             second  = undefined;
-        }
-        else {
-            debugVar();
         }
     }
 
@@ -257,12 +251,10 @@ function operatorSelect(e) {
             first = numInput;
             firstOperator = e.key;
             getNumberReset();
-            debugVar();
         }
 
         else if (numInput === undefined && first !== undefined && firstOperator === undefined && second === undefined && secondOperator === undefined && result === undefined) {
             firstOperator = e.key;
-            debugVar();
         }
 
         else if (numInput !== undefined && first !== undefined && firstOperator === undefined && second === undefined && secondOperator === undefined && result === undefined) {
@@ -276,14 +268,11 @@ function operatorSelect(e) {
         }
 
         else if (numInput !== undefined && first!== undefined && firstOperator !== undefined && second === undefined && secondOperator === undefined && result === undefined) {
-            debugVar();
             second = numInput;
             secondOperator = e.key;
             getNumberReset();
             result = operate(firstOperator, first, second)
             calcDisplay.innerHTML = result;
-            debugVar();
-            debugVar();
         }
 
         else if (numInput === undefined && first !== undefined && firstOperator !== undefined && second !== undefined && secondOperator !== undefined && result !== undefined) {
@@ -303,10 +292,6 @@ function operatorSelect(e) {
             secondOperator = undefined;
             second  = undefined;
         }
-        else {
-            debugVar();
-        }
-
     }
 }
 
@@ -327,7 +312,6 @@ function reset() {
 function equal() {
     if (numInput !== undefined && firstOperator !== undefined && second === undefined && secondOperator === undefined && result === undefined) {
         second = numInput;
-        debugVar()
         getNumberReset();
         result = operate(firstOperator, first, second);
         calcDisplay.innerHTML = result;
@@ -335,7 +319,6 @@ function equal() {
         result = undefined;
         second = undefined;
         firstOperator = undefined;
-        debugVar();
     } 
     else if (numInput !== undefined && first !== undefined && second !== undefined && firstOperator !== undefined && secondOperator !== undefined && result !== undefined) {
         first = result; // 27
@@ -349,11 +332,6 @@ function equal() {
         result = undefined;
         second = undefined;
         firstOperator = undefined;
-        debugVar();
-    }
-   
-    else {
-        debugVar();
     }
 }
 
@@ -363,8 +341,7 @@ function getNumberReset() {
     decimalAdded = false;
 }
  
-function debugVar() {
-}
+
 
 function add(a,b) {
     return a+b;
@@ -382,7 +359,6 @@ function divide(a,b) {
     let quotient;
     if (b === 0) {
         reset();
-        debugVar();
         return "ERR"
         //remove event listeners from all buttons but C
     }
@@ -410,7 +386,6 @@ function operate(operator, first, second) {
         case `/`:
             return divide(first,second)
         default:
-            debugVar();
             reset();
             return `OPERR`
             //remove event listeners except C button
