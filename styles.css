@@ -1,13 +1,7 @@
-
 :root {
-    --gradient: linear-gradient(
-        90deg,
-        #0b00ab,
-        #070066,
-        #040038,
-        #010012
-    );
+    --gradient: linear-gradient(90deg, #000678, black, #000678);
 }
+
   body {
       display: flex;
       margin: 0;
@@ -17,23 +11,32 @@
       min-height: 100vh;
       background-image: var(--gradient);
       background-size: 400%;
-      animation: bg-animation 55s infinite;
+      animation: bg-animation 60s infinite;
+      flex-direction: column;
   }
   
   @keyframes bg-animation 
   {
-      0% {background-position: left;}
-      25% {background-position: right;}
-      50% {background-position: left;}
-      75% {background-position: right;}
-      100% {background-position: left;}  
+    0% {background-position: left}
+    50% {background-position: right}
+    100% {background-position: left}
     }
 
+h1 {
+    font-family: 'Press Start 2P', cursive;
+    color: #fff;
+    padding-bottom: 50px;
+    font-size: 3em;
 
+}
+
+button:hover, button:focus {
+    outline: none;
+  }
 
 .calc-container {
-    min-width:400px;
-    max-width: 400px;
+    min-width:300px;
+    max-width: 300px;
     display: flex;
     flex-direction: column;
     color: white;
@@ -49,9 +52,9 @@
     color: white;
     justify-content: right;
     align-items: center;
-    height:100px;
+    height: 50px;
     border: 1px solid black;
-    font-size: 4.5em;
+    font-size: 2em;
     font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     margin-bottom: 5px;
     padding-right: 5px;
@@ -68,7 +71,7 @@
 .calc-row {
     display:flex;
     flex-direction: row;
-    height: 50px;
+    height: 45px;
     width: 100%;
 }
 
@@ -84,7 +87,7 @@ button {
 }
 
 #zero-button {
-    flex: 2.05;
+    flex: 2.065;
 }
 
 div#calc-first-row button:first-child {
