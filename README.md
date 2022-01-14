@@ -1,5 +1,5 @@
 # Project: Calculator
-## Description: On-screen calculator built using HTML, CSS, and Javascript. Calculates a single pair of numbers at a time.
+## On-screen calculator built using HTML, CSS, and Javascript. Calculates a single pair of numbers at a time.
 
 ### **Features:**
 * Supported operations:  **divide**, **multiply**, **subtract**, **add**
