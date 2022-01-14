@@ -52,10 +52,10 @@ button:hover, button:focus {
     color: white;
     justify-content: right;
     align-items: center;
-    height: 50px;
+    height: 45px;
     border: 1px solid black;
     font-size: 2em;
-    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-family: 'Iceland', Arial, sans-serif;
     margin-bottom: 5px;
     padding-right: 5px;
 }
@@ -71,7 +71,7 @@ button:hover, button:focus {
 .calc-row {
     display:flex;
     flex-direction: row;
-    height: 45px;
+    height: 47px;
     width: 100%;
 }
 
@@ -83,7 +83,8 @@ button {
     border-radius: 5px;
     background-color: #C9C9C9;
     color: black;
-    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-family: 'Press Start 2P', cursive;
+    font-size: .7em;
 }
 
 #zero-button {
