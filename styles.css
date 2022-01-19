@@ -80,7 +80,7 @@ button {
     padding: .5px;
     margin: .5px;
     border: 1px solid black;
-    border-radius: 5px;
+    border-radius: 0px;
     background-color: #C9C9C9;
     color: black;
     font-family: 'Press Start 2P', cursive;
@@ -88,7 +88,7 @@ button {
 }
 
 #zero-button {
-    flex: 2.065;
+    flex: 2.055;
 }
 
 div#calc-first-row button:first-child {
