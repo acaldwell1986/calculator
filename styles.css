@@ -1,19 +1,42 @@
-body {
-    display: flex;
-    margin: 0;
-    padding: 0;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    background-color: black;
-    background-image: url(blurry-gradient5.svg);
-    background-repeat: no-repeat;
-    background-size: cover;
+:root {
+    --gradient: linear-gradient(90deg, #000678, black, #000678);
 }
 
+  body {
+      display: flex;
+      margin: 0;
+      padding: 0;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background-image: var(--gradient);
+      background-size: 400%;
+      animation: bg-animation 60s infinite;
+      flex-direction: column;
+  }
+  
+  @keyframes bg-animation 
+  {
+    0% {background-position: left}
+    50% {background-position: right}
+    100% {background-position: left}
+    }
+
+h1 {
+    font-family: 'Press Start 2P', cursive;
+    color: #fff;
+    padding-bottom: 50px;
+    font-size: 3em;
+
+}
+
+button:hover, button:focus {
+    outline: none;
+  }
+
 .calc-container {
-    min-width:400px;
-    max-width: 400px;
+    min-width:300px;
+    max-width: 300px;
     display: flex;
     flex-direction: column;
     color: white;
@@ -29,10 +52,10 @@ body {
     color: white;
     justify-content: right;
     align-items: center;
-    height:100px;
+    height: 45px;
     border: 1px solid black;
-    font-size: 4.5em;
-    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 2em;
+    font-family: 'Iceland', Arial, sans-serif;
     margin-bottom: 5px;
     padding-right: 5px;
 }
@@ -48,7 +71,7 @@ body {
 .calc-row {
     display:flex;
     flex-direction: row;
-    height: 50px;
+    height: 47px;
     width: 100%;
 }
 
@@ -57,14 +80,15 @@ button {
     padding: .5px;
     margin: .5px;
     border: 1px solid black;
-    border-radius: 5px;
+    border-radius: 0px;
     background-color: #C9C9C9;
     color: black;
-    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-family: 'Press Start 2P', cursive;
+    font-size: .7em;
 }
 
 #zero-button {
-    flex: 2.05;
+    flex: 2.055;
 }
 
 div#calc-first-row button:first-child {
